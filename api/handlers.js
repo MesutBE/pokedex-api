@@ -26,7 +26,25 @@ const handlers = {
       res.status(500).send(`${err.name}: ${err.message}`);
     }
   },
-  evolutionsOf: async (res, req) => { },
+  evolutionsOf: async (res, req) => { 
+
+    // cast the user input to the correct type
+    // according to the pokemon schema: ./data/schemas/pokemon.json
+    const name = req.params.name;
+
+    // use the logic you wrote to process the pokedex data
+    try {
+      const result = logic.evolutionsOf(pokedex, name);
+      console.log(result);
+
+      // respond with the return value if there was no error
+      res.json(result);
+    } catch (err) {
+
+      // respond with 500 if there was an error
+      res.status(500).send(`${err.name}: ${err.message}`);
+    }
+  },
   typeStats: async (res, req) => { },
   findById: async (res, req) => { },
   findByType: async (res, req) => { },

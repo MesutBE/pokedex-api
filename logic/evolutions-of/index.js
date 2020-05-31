@@ -1,6 +1,34 @@
 const evolutionOf = (pokeArray, name) => {
+  const arr = [];
+  pokeArray.forEach(item => {
+    if (item.name === name){
+      arr.push({ num: item.num, name: item.name })
+      
+    }
+    if (item.hasOwnProperty('prev_evolution')){
+      item.prev_evolution.forEach(item2 => {
+        if( item2.name === name){
+          arr.push({ num: item.num, name: item.name })
+        }
+      })
+    }
+    if (item.hasOwnProperty('next_evolution')) {
+      item.next_evolution.forEach(item3 => {
+        if (item3.name === name) {
+          arr.push({ num: item.num, name: item.name })
+        }
+      })
+    }
 
+  })
+  if (arr.length === 0) {
+    return null;
+  }
+  // console.log(arr);
+  return arr;
+  
 };
+
 
 module.exports = evolutionOf;
 
